@@ -248,9 +248,9 @@ $latestVideoId = $result['items']['0']['id']['videoId'];
             <li class="list-group-item">
               <h3>Location</h3>
             </li>
-            <li class="list-group-item">My Office</li>
-            <li class="list-group-item">Jl. Setiabudhi No. 193, Bandung</li>
-            <li class="list-group-item">West Java, Indonesia</li>
+            <li class="list-group-item">My Address</li>
+            <li class="list-group-item">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, tempore?</li>
+            <li class="list-group-item">Lorem ipsum dolor sit amet consectetur.</li>
           </ul>
         </div>
 
@@ -288,7 +288,7 @@ $latestVideoId = $result['items']['0']['id']['videoId'];
     <div class="container">
       <div class="row">
         <div class="col text-center">
-          <p>Copyright &copy; 2018.</p>
+          <p>Copyright &copy; 2022.</p>
         </div>
       </div>
     </div>
