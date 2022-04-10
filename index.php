@@ -1,19 +1,28 @@
 <?php
 
-$curl = curl_init();
+function getCurl($url)
+{
+  $curl = curl_init();
+  curl_setopt($curl, CURLOPT_URL, $url);
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+  $result = curl_exec($curl);
+  curl_close($curl);
+  return json_decode($result, true);
+  // var_dump($result);
+}
 
-curl_setopt($curl, CURLOPT_URL, 'https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=UCkIyv-dVa4YguJPbUQVtDxg&key=AIzaSyBvOaAoAP4OGFyMDlPbF4K6-cfItudNt1M');
-
-curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-$result = curl_exec($curl);
-curl_close($curl);
-
-$result = json_decode($result, true);
-// var_dump($result);
+$result = getCurl('https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=UCkIyv-dVa4YguJPbUQVtDxg&key=AIzaSyBvOaAoAP4OGFyMDlPbF4K6-cfItudNt1M');
 
 $youtubeProfilePic = $result['items'][0]['snippet']['thumbnails']['medium']['url'];
 $channelName = $result['items'][0]['snippet']['title'];
 $subscriber = $result['items'][0]['statistics']['subscriberCount'];
+
+
+//later video
+$urlLastVideo = 'https://www.googleapis.com/youtube/v3/search?channelId=UCkIyv-dVa4YguJPbUQVtDxg&key=AIzaSyBvOaAoAP4OGFyMDlPbF4K6-cfItudNt1M&maxResult=1&order=date&part=snippet';
+$result = getCurl($urlLastVideo);
+$latestVideoId = $result['items']['0']['id']['videoId'];
+
 ?>
 
 
@@ -118,7 +127,7 @@ $subscriber = $result['items'][0]['statistics']['subscriberCount'];
           <div class="row mt-3 pb-3">
             <div class="col">
               <div class="ratio ratio-16x9">
-                <iframe src="https://www.youtube.com/embed/hsFzPHXw_WM?rel=0" title="YouTube video" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/<?= $latestVideoId; ?>?rel=0" title="YouTube video" allowfullscreen></iframe>
               </div>
             </div>
           </div>
